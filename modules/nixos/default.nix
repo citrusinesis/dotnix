@@ -70,7 +70,7 @@
     # Enable command-not-found suggestions
     command-not-found.enable = true;
     # Bash shell configuration
-    bash.enableCompletion = true;
+    bash.completion.enable = true;
     # Zsh shell configuration
     zsh.enable = true;
   };
@@ -86,7 +86,7 @@
     };
     packages = with pkgs; [
       noto-fonts
-      noto-fonts-cjk
+      noto-fonts-cjk-sans
       noto-fonts-emoji
       liberation_ttf
       fira-code

@@ -12,24 +12,43 @@
   networking.networkmanager.enable = true;
 
   # Set your time zone
-  time.timeZone = "UTC"; # Change to your timezone
+  time.timeZone = "Asia/Seoul";
 
   # Select internationalisation properties
-  i18n.defaultLocale = "en_US.UTF-8";
+  i18n = {
+    defaultLocale = "en_US.UTF-8";
+
+    extraLocaleSettings = {
+      LC_ADDRESS = "ko_KR.UTF-8";
+      LC_IDENTIFICATION = "ko_KR.UTF-8";
+      LC_MEASUREMENT = "ko_KR.UTF-8";
+      LC_MONETARY = "ko_KR.UTF-8";
+      LC_NAME = "ko_KR.UTF-8";
+      LC_NUMERIC = "ko_KR.UTF-8";
+      LC_PAPER = "ko_KR.UTF-8";
+      LC_TELEPHONE = "ko_KR.UTF-8";
+      LC_TIME = "ko_KR.UTF-8";
+    };
+
+    inputMethod = {
+      enable = true;
+      type = "kime";
+      kime.iconColor = "White";
+    };
+  };
 
   # Enable the X11 windowing system
   services.xserver.enable = true;
-  
+
   # Enable KDE Plasma 6 Desktop Environment
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma6.enable = true;
+  services.displayManager.sddm.enable = true;
+  services.desktopManager.plasma6.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb.layout = "us";
 
   # Enable sound with PipeWire (recommended for Plasma 6)
-  sound.enable = true;
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -57,11 +76,6 @@
     git
     vim
     htop
-    
-    # KDE Plasma utilities
-    plasma-browser-integration
-    kate
-    ark
   ];
 
   # Enable the OpenSSH daemon
