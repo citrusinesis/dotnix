@@ -1,0 +1,28 @@
+# Nix build output
+result
+result-*
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*~
+
+# direnv
+.direnv/
+.envrc
+
+# Mac specific
+.DS_Store
+
+# Temp files
+*.tmp
+*.log
+
+# Builds and dependencies
+/target/
+/dist/
+/node_modules/
+
+# Darwin rebuild state
+/private/var/folders/
