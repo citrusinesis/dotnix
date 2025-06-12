@@ -8,6 +8,7 @@
     ./ssh.nix
     ./direnv.nix
     ./starship.nix
-    # Add any new program configurations here
+    ./vscode.nix
+    ./kitty.nix
   ];
 }

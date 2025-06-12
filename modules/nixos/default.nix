@@ -89,14 +89,16 @@
       noto-fonts-cjk-sans
       noto-fonts-emoji
       liberation_ttf
-      fira-code
-      fira-code-symbols
+      
+      nerd-fonts.geist-mono
+      nerd-fonts.d2coding
+      nerd-fonts.fira-code
     ];
     fontconfig = {
       defaultFonts = {
         serif = [ "Noto Serif" "Liberation Serif" ];
         sansSerif = [ "Noto Sans" "Liberation Sans" ];
-        monospace = [ "Fira Code" "Liberation Mono" ];
+        monospace = [ "GeistMono NF" "Liberation Mono" ];
         emoji = [ "Noto Color Emoji" ];
       };
     };

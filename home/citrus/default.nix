@@ -27,6 +27,10 @@
 
   # Configure packages
   home.packages = with pkgs; [
+    # Nix
+    nil
+    nixd
+
     # Development tools
     ripgrep
     fd

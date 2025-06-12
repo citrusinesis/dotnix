@@ -7,6 +7,11 @@
     ../../modules/nixos
   ];
 
+  # Bootloader
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.grub.enable = lib.mkForce false;
+
   # Basic system configuration
   networking.hostName = "blender";
   networking.networkmanager.enable = true;
@@ -58,10 +63,35 @@
     jack.enable = true;
   };
 
+  # Bluetooth
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings.General.Experimental = true;
+  };
+
+  # Nvidia settings
+  hardware.graphics.enable = true;
+  services.xserver.videoDrivers = [ "nvidia" ];
+
+  hardware.nvidia = {
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    
+    modesetting.enable = true;
+    open = true;
+    nvidiaSettings = true;
+
+    # powerManagement = {
+    #   enable = true;
+    #   finegrained = true;
+    # }
+  };
+
   # Define a user account
   users.users.${username} = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ]; # Enable 'sudo' for the user.
+    extraGroups = [ "wheel" "networkmanager" ]; 
+    shell = pkgs.zsh;
     packages = with pkgs; [
       firefox
       git
