@@ -3,7 +3,7 @@
   programs.vscode = {
     enable = true;
 
-    settings = {
+    profiles.default.userSettings = {
       editor.formatOnSaveMode = "modificationsIfAvailable";
       editor.formatOnType = true;
 
@@ -13,7 +13,7 @@
       workbench.list.smoothScrolling = true;
       terminal.integrated.smoothScrolling = true;
 
-      editor.fontFamily = "GeistMono NF, D2CodingLigature Nerd Font, monospace";
+      editor.fontFamily = "GeistMono NF Medium, D2CodingLigature Nerd Font, monospace";
       editor.fontSize = 15;
       terminal.integrated.fontSize = 14;
 

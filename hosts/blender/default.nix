@@ -81,11 +81,20 @@
     open = true;
     nvidiaSettings = true;
 
-    # powerManagement = {
-    #   enable = true;
-    #   finegrained = true;
-    # }
+    powerManagement = {
+      enable = true;
+      finegrained = true;
+    };
+
+    prime = {
+      offload.enable = true;
+      
+      intelBusId = lib.mkDefault "PCI:0:2:0"; 
+      nvidiaBusId = lib.mkDefault "PCI:2:0:0";
+    };
   };
+
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   # Define a user account
   users.users.${username} = {
@@ -115,6 +124,18 @@
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [ 22 ];
+  };
+
+  services.tailscale = {
+    enable = true;
+    extraSetFlags = [
+      "--advertise-exit-node"
+    ];
+  };
+  boot.kernel.sysctl = {
+    "net.ipv4.ip_forward" = 1; 
+    "net.ipv4.conf.all.forwarding" = 1; 
+    "net.ipv6.conf.all.forwarding" = 1;
   };
 
   # This value determines the NixOS release from which the default

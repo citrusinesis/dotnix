@@ -31,8 +31,8 @@
 
       # System commands
       update = if pkgs.stdenv.isDarwin
-               then "darwin-rebuild switch --flake ~/.nixconfig#squeezer"
-               else "sudo nixos-rebuild switch --flake ~/.nixconfig#blender";
+               then "sudo darwin-rebuild switch --flake ~/.nix-config#squeezer"
+               else "sudo nixos-rebuild switch --flake ~/.nix-config#blender";
 
       # Utilities
       grep = "grep --color=auto";

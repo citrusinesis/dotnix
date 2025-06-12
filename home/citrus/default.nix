@@ -30,6 +30,7 @@
     # Nix
     nil
     nixd
+    nixfmt-rfc-style
 
     # Development tools
     ripgrep

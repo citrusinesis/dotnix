@@ -21,47 +21,6 @@
         error_symbol = "[❯](bold red)";
         vicmd_symbol = "[❮](bold green)";
       };
-
-      username = {
-        style_user = "bold blue";
-        style_root = "bold red";
-        format = "[$user]($style)@";
-        disabled = false;
-      };
-
-      hostname = {
-        ssh_only = false;
-        format = "[$hostname](bold yellow) ";
-        disabled = false;
-      };
-
-      directory = {
-        truncation_length = 3;
-        truncation_symbol = "…/";
-        home_symbol = "~";
-        read_only_style = "red";
-        read_only = " 🔒";
-        format = "[$path]($style)[$read_only]($read_only_style) ";
-      };
-
-      # Nix-specific modules
-      custom = {
-        nix_profile = {
-          command = "nix profile list | wc -l";
-          when = "test -e ~/.nix-profile";
-          format = "[$symbol$output]($style) ";
-          style = "bold blue";
-          symbol = "👤 ";
-        };
-
-        flake_inputs = {
-          command = "grep -c 'inputs' flake.nix 2>/dev/null || echo 0";
-          when = "test -e flake.nix";
-          format = "[$symbol$output]($style) ";
-          style = "bold green";
-          symbol = "🔄 ";
-        };
-      };
     };
   };
 
