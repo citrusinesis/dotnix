@@ -42,11 +42,10 @@
             home-manager.nixosModules.home-manager {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.${username} = import ./home/${username};
+              home-manager.users = {
+                ${username} = import ./home/${username};
+              } // extraUsers;
               home-manager.extraSpecialArgs = { inherit inputs username; };
-              
-              # Additional users configuration
-              home-manager.users = extraUsers;
             }
           ] ++ modules;
         };
@@ -76,10 +75,10 @@
           hostName = "blender";
           username = personal.user.username;
           
-          # Uncomment the following to enable gaming configuration with separate game user
-          # extraUsers = {
-          #   game = import ./home/game { inherit inputs; username = "game"; };
-          # };
+          # Gaming configuration with separate game user
+          extraUsers = {
+            game = import ./home/game { inherit inputs; username = "game"; };
+          };
         };
       };
       
