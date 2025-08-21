@@ -77,7 +77,10 @@
           
           # Gaming configuration with separate game user
           extraUsers = {
-            game = import ./home/game { inherit inputs; username = "game"; };
+            game = { ... }: {
+              imports = [ ./home/game ];
+              _module.args = { username = "game"; inherit inputs; };
+            };
           };
         };
       };
