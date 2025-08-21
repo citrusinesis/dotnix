@@ -5,6 +5,10 @@
     ./hardware-configuration.nix
     ../../modules/shared
     ../../modules/nixos
+    
+    # Gaming configuration (uncomment to enable)
+    # ../../modules/nixos/gaming.nix
+    # ../../modules/nixos/storage-gaming.nix
   ];
 
   # Bootloader
@@ -101,21 +105,28 @@
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ]; 
     shell = pkgs.zsh;
-    packages = with pkgs; [
-      firefox
-      git
-      vim
-    ];
+    # User packages managed by home-manager
   };
 
-  # List packages installed in system profile
-  environment.systemPackages = with pkgs; [
-    wget
-    curl
-    git
-    vim
-    htop
-  ];
+  # Gaming user account (uncomment to enable)
+  # users.users.game = {
+  #   isNormalUser = true;
+  #   description = "Gaming User";
+  #   extraGroups = [ "gamemode" "games" "audio" "video" "input" "render" ];
+  #   shell = pkgs.bash;
+  #   # Gaming user packages managed by home-manager
+  # };
+
+  # Gaming storage configuration (uncomment to enable)
+  # gaming.storage = {
+  #   enable = true;
+  #   device = "/dev/sda";
+  #   mountPoint = "/mnt/games";
+  #   fileSystem = "auto";  # Auto-detect filesystem type
+  #   gameUser = "game";
+  # };
+
+  # System packages are defined in shared module
 
   # Enable the OpenSSH daemon
   services.openssh.enable = true;

@@ -31,8 +31,8 @@
 
       # System commands
       update = if pkgs.stdenv.isDarwin
-               then "sudo darwin-rebuild switch --flake ~/.nix-config#squeezer"
-               else "sudo nixos-rebuild switch --flake ~/.nix-config#blender";
+               then "sudo darwin-rebuild switch --flake ~/Development/dotnix#squeezer"
+               else "sudo nixos-rebuild switch --flake ~/Development/dotnix#blender";
 
       # Utilities
       grep = "grep --color=auto";
@@ -46,7 +46,7 @@
 
       # Quick edit
       zshrc = "$EDITOR ~/.zshrc";
-      nixconf = "cd ~/.nixconfig";
+      nixconf = "cd ~/Development/dotnix";
     };
 
     # History configuration
@@ -89,9 +89,7 @@
       # Set PATH
       export PATH=$HOME/.local/bin:$PATH
 
-      # Set default editor
-      export EDITOR='vim'
-      export VISUAL='vim'
+      # Default editor is set in shared module environment variables
 
       # Bind keys
       bindkey "^[[1;5C" forward-word

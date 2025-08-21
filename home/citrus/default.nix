@@ -27,6 +27,13 @@
 
   # Configure packages
   home.packages = with pkgs; [
+    # Browsers
+    firefox
+
+    # Editors and terminal utilities
+    neovim
+    tmux
+
     # Nix
     nil
     nixd
@@ -39,7 +46,6 @@
     tree
 
     # Command line utilities
-    htop
     btop
     bat
     eza
@@ -50,9 +56,6 @@
 
     # Additional utilities
     file
-    unzip
-    wget
-    curl
     du-dust
     duf
     procs

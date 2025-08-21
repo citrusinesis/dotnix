@@ -11,6 +11,9 @@
   networking.hostName = "squeezer";
   networking.knownNetworkServices = [ "Wi-Fi" "Ethernet" ];
 
+  # Set timezone (consistent with blender host)
+  time.timeZone = "Asia/Seoul";
+
   # Host-specific homebrew casks
   homebrew.casks = [
     # Browser
@@ -50,17 +53,10 @@
 
   # Add machine-specific packages
   environment.systemPackages = with pkgs; [
-    # Development tools
-    nodejs
-    python3
-    go
+    # Development language runtimes are managed in home-manager direnv config
+    # User tools (neovim, tmux, gnupg) moved to home-manager
 
     # System utilities
     coreutils
-    gnupg
-
-    # Terminal utilities
-    tmux
-    neovim
   ];
 }

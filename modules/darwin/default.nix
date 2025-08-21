@@ -13,32 +13,16 @@
   # Set default time zone
   time.timeZone = lib.mkDefault "UTC";
 
-  # Set environment variables
-  environment.variables = {
-    EDITOR = "vim";
-    VISUAL = "vim";
-  };
+  # Environment variables are defined in shared module
 
-  # Add system packages for all Darwin systems
-  environment.systemPackages = with pkgs; [
-    curl
-    wget
-    git
-    vim
-    htop
-  ];
+  # System packages are defined in shared module
 
   # Enable user shells
   programs.zsh.enable = true;
   programs.bash.enable = true;
 
-  # Configure fonts
+  # Additional Darwin-specific font configuration
   fonts = {
-    packages = with pkgs; [
-      nerd-fonts.geist-mono
-      nerd-fonts.d2coding
-      nerd-fonts.jetbrains-mono
-      nerd-fonts.fira-code
-    ];
+    # Shared fonts are defined in shared module
   };
 }

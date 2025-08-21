@@ -1,10 +1,13 @@
 { config, lib, pkgs, ... }:
 
+let
+  personal = import ../../../personal.nix;
+in
 {
   programs.git = {
     enable = true;
-    userName = "Jiho Song";
-    userEmail = "jihojiho2003@gmail.com";
+    userName = personal.git.userName;
+    userEmail = personal.git.userEmail;
 
     ignores = [
       ".DS_Store"

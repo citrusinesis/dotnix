@@ -4,7 +4,6 @@
   inputs = {
     # Core inputs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
     
     # Darwin inputs
     darwin = {
@@ -22,18 +21,16 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, darwin, home-manager, flake-utils, ... }@inputs:
+  outputs = { self, nixpkgs, darwin, home-manager, flake-utils, ... }@inputs:
     let
       supportedSystems = [ "x86_64-linux" "aarch64-darwin" "x86_64-darwin" ];
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
       
-      # Shared configuration across all hosts
-      sharedOverlays = [
-        # Add your overlays here
-      ];
+      # Import personal configuration
+      personal = import ./personal.nix;
       
       # Helper to create nixos configurations
-      mkNixosConfig = { system, hostName, username, modules ? [] }:
+      mkNixosConfig = { system, hostName, username, modules ? [], extraUsers ? {} }:
         nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs username; };
@@ -47,6 +44,9 @@
               home-manager.useUserPackages = true;
               home-manager.users.${username} = import ./home/${username};
               home-manager.extraSpecialArgs = { inherit inputs username; };
+              
+              # Additional users configuration
+              home-manager.users = extraUsers;
             }
           ] ++ modules;
         };
@@ -74,7 +74,12 @@
         blender = mkNixosConfig {
           system = "x86_64-linux";
           hostName = "blender";
-          username = "citrus"; # Replace with your actual username
+          username = personal.user.username;
+          
+          # Uncomment the following to enable gaming configuration with separate game user
+          # extraUsers = {
+          #   game = import ./home/game { inherit inputs; username = "game"; };
+          # };
         };
       };
       
@@ -82,7 +87,7 @@
         squeezer = mkDarwinConfig {
           system = "aarch64-darwin"; # Adjust if your Mac is Intel-based
           hostName = "squeezer"; 
-          username = "citrus"; # Replace with your actual username
+          username = personal.user.username;
         };
       };
       

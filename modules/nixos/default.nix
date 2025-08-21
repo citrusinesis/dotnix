@@ -78,21 +78,18 @@
   # Default user configuration
   users.mutableUsers = lib.mkDefault true;
 
-  # Default fonts configuration
+  # NixOS-specific fonts configuration
   fonts = {
     fontDir = {
       enable = true;
       decompressFonts = true;
     };
     packages = with pkgs; [
+      # System fonts (Nerd fonts are in shared module)
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-emoji
       liberation_ttf
-      
-      nerd-fonts.geist-mono
-      nerd-fonts.d2coding
-      nerd-fonts.fira-code
     ];
     fontconfig = {
       defaultFonts = {

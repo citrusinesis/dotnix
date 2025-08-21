@@ -17,13 +17,13 @@
 
   # Shared system packages for all systems
   environment.systemPackages = with pkgs; [
-    # Core utilities
+    # Core utilities (git managed by home-manager)
     curl
     wget
-    git
-    vim
-    neovim
     htop
+
+    # Editors (vim as fallback, neovim managed by users)
+    vim
 
     # Development tools
     gnumake
@@ -40,17 +40,44 @@
     settings = {
       # Enable flakes and new 'nix' command
       experimental-features = [ "nix-command" "flakes" ];
-      # Allow build-time CPU offloading
+      
+      # Performance optimizations
       builders-use-substitutes = true;
+      max-jobs = "auto";
+      cores = 0; # Use all available cores
+      
+      # Additional substituters for faster builds
+      substituters = [
+        "https://cache.nixos.org/"
+        "https://nix-community.cachix.org"
+      ];
+      trusted-public-keys = [
+        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      ];
+      
       # Trust users to add to nix store
       trusted-users = [ "root" "@wheel" "@admin" ];
+      
+      # Build optimization
+      auto-optimise-store = true;
     };
-    # Garbage collection
+    
+    # Improved garbage collection
     gc = {
       automatic = true;
-      options = "--delete-older-than 30d";
+      options = "--delete-older-than 14d"; # More frequent cleanup
     };
   };
 
   nixpkgs.config.allowUnfree = true;
+
+  # Shared font configuration for all systems
+  fonts.packages = with pkgs; [
+    # Nerd fonts for both platforms
+    nerd-fonts.geist-mono
+    nerd-fonts.d2coding
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.fira-code
+  ];
 }
