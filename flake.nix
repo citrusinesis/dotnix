@@ -75,13 +75,6 @@
           hostName = "blender";
           username = personal.user.username;
           
-          # Gaming configuration with separate game user
-          extraUsers = {
-            game = { ... }: {
-              imports = [ ./home/game ];
-              _module.args = { username = "game"; inherit inputs; };
-            };
-          };
         };
       };
       

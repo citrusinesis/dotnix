@@ -6,9 +6,6 @@
     ../../modules/shared
     ../../modules/nixos
     
-    # Gaming configuration
-    ../../modules/nixos/gaming.nix
-    ../../modules/nixos/storage-gaming.nix
   ];
 
   # Bootloader
@@ -108,23 +105,7 @@
     # User packages managed by home-manager
   };
 
-  # Gaming user account
-  users.users.game = {
-    isNormalUser = true;
-    description = "Gaming User";
-    extraGroups = [ "gamemode" "games" "audio" "video" "input" "render" ];
-    shell = pkgs.bash;
-    # Gaming user packages managed by home-manager
-  };
 
-  # Gaming storage configuration
-  gaming.storage = {
-    enable = true;
-    device = "/dev/sda";
-    mountPoint = "/mnt/games";
-    fileSystem = "auto";  # Auto-detect filesystem type
-    gameUser = "game";
-  };
 
   # System packages are defined in shared module
 
