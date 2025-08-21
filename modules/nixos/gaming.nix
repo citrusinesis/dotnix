@@ -38,30 +38,6 @@
 
   # Gaming-specific services
   services = {
-    # Enable GameMode system daemon
-    gamemode = {
-      enable = true;
-      enableRenice = true;
-      settings = {
-        general = {
-          renice = 10;
-          ioprio = 0;
-          inhibit_screensaver = 1;
-          softrealtime = "auto";
-        };
-        gpu = {
-          apply_gpu_optimisations = "accept-responsibility";
-          gpu_device = 0;
-          amd_performance_level = "high";
-          nv_powermizer_mode = 1;
-        };
-        cpu = {
-          park_cores = "no";
-          pin_cores = "no";
-        };
-      };
-    };
-
     # Pipewire low-latency for gaming audio
     pipewire = {
       extraConfig.pipewire = {
@@ -188,9 +164,30 @@
       ];
     };
 
-    # GameMode configuration
-    gamemode.enable = true;
-    
+     # Enable GameMode system daemon
+    gamemode = {
+      enable = true;
+      enableRenice = true;
+      settings = {
+        general = {
+          renice = 10;
+          ioprio = 0;
+          inhibit_screensaver = 1;
+          softrealtime = "auto";
+        };
+        gpu = {
+          apply_gpu_optimisations = "accept-responsibility";
+          gpu_device = 0;
+          amd_performance_level = "high";
+          nv_powermizer_mode = 1;
+        };
+        cpu = {
+          park_cores = "no";
+          pin_cores = "no";
+        };
+      };
+    };
+
     # Enable dconf for some gaming applications
     dconf.enable = true;
   };
