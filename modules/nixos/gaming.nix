@@ -189,7 +189,7 @@
     };
 
     # GameMode configuration
-    gamemode.enable = true;
+    programs.gamemode.enable = true;
     
     # Enable dconf for some gaming applications
     dconf.enable = true;
