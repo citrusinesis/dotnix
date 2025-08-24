@@ -75,7 +75,9 @@
           system = "x86_64-linux";
           hostName = "blender";
           username = personal.user.username;
-          
+          extraUsers = {
+            game = import ./home/game;
+          };
         };
       };
       
