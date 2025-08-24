@@ -4,6 +4,7 @@
   inputs = {
     # Core inputs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     
     # Darwin inputs
     darwin = {
@@ -21,7 +22,7 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, darwin, home-manager, flake-utils, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, darwin, home-manager, flake-utils, ... }@inputs:
     let
       supportedSystems = [ "x86_64-linux" "aarch64-darwin" "x86_64-darwin" ];
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
@@ -33,7 +34,7 @@
       mkNixosConfig = { system, hostName, username, modules ? [], extraUsers ? {} }:
         nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs username; };
+          specialArgs = { inherit inputs username nixpkgs-unstable; };
           modules = [
             # Host-specific configuration
             ./hosts/${hostName}
@@ -45,7 +46,7 @@
               home-manager.users = {
                 ${username} = import ./home/${username};
               } // extraUsers;
-              home-manager.extraSpecialArgs = { inherit inputs username; };
+              home-manager.extraSpecialArgs = { inherit inputs username nixpkgs-unstable; };
             }
           ] ++ modules;
         };
@@ -54,7 +55,7 @@
       mkDarwinConfig = { system, hostName, username, modules ? [] }:
         darwin.lib.darwinSystem {
           inherit system;
-          specialArgs = { inherit inputs username; };
+          specialArgs = { inherit inputs username nixpkgs-unstable; };
           modules = [
             # Host-specific configuration
             ./hosts/${hostName}
@@ -64,7 +65,7 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.${username} = import ./home/${username};
-              home-manager.extraSpecialArgs = { inherit inputs username; };
+              home-manager.extraSpecialArgs = { inherit inputs username nixpkgs-unstable; };
             }
           ] ++ modules;
         };

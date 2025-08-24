@@ -1,10 +1,24 @@
-{ config, lib, pkgs, inputs, username, ... }:
+{ config, lib, pkgs, inputs, username, nixpkgs-unstable, ... }:
 
+let
+  # Import unstable packages with unfree support
+  unstable = import nixpkgs-unstable {
+    system = pkgs.stdenv.hostPlatform.system;
+    config = {
+      allowUnfree = true;
+    };
+  };
+in
 {
   # Import modular program configurations
   imports = [
     ./programs
   ];
+
+  # Configure nixpkgs for home-manager with unfree support
+  nixpkgs.config = {
+    allowUnfree = true;
+  };
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -62,6 +76,9 @@
 
     # Platform-specific packages
     (lib.mkIf pkgs.stdenv.isDarwin coreutils)
+    
+    # Example: Use packages from unstable channel
+    # unstable.some-bleeding-edge-package
   ];
 
   # Additional home configurations based on platform
