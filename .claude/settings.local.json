@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(mkdir:*)",
-      "Bash(nix flake check:*)"
+      "Bash(nix flake check:*)",
+      "WebFetch(domain:wiki.archlinux.org)"
     ],
     "deny": [],
     "ask": []
