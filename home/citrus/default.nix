@@ -41,9 +41,6 @@ in
 
   # Configure packages
   home.packages = with pkgs; [
-    # Browsers
-    firefox
-
     # Editors and terminal utilities
     neovim
     tmux
@@ -79,6 +76,8 @@ in
     
     # Example: Use packages from unstable channel
     # unstable.some-bleeding-edge-package
+    unstable.claude-code
+    unstable.firefox
   ];
 
   # Additional home configurations based on platform
