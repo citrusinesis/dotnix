@@ -26,6 +26,3 @@ result-*
 
 # Darwin rebuild state
 /private/var/folders/
-
-# NixOS configuration
-hardware-configuration.nix
