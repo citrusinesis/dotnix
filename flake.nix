@@ -30,12 +30,18 @@
       # Import personal configuration
       personal = import ./personal.nix;
       
+      # Import overlays
+      overlays = import ./overlays { inherit inputs; };
+      
       # Helper to create nixos configurations
       mkNixosConfig = { system, hostName, username, modules ? [], extraUsers ? {} }:
         nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs username nixpkgs-unstable; };
+          specialArgs = { inherit inputs username; };
           modules = [
+            # Apply overlays
+            { nixpkgs.overlays = builtins.attrValues overlays; }
+            
             # Host-specific configuration
             ./hosts/${hostName}
             
@@ -46,7 +52,7 @@
               home-manager.users = {
                 ${username} = import ./home/${username};
               } // extraUsers;
-              home-manager.extraSpecialArgs = { inherit inputs username nixpkgs-unstable; };
+              home-manager.extraSpecialArgs = { inherit inputs username; };
             }
           ] ++ modules;
         };
@@ -55,8 +61,11 @@
       mkDarwinConfig = { system, hostName, username, modules ? [] }:
         darwin.lib.darwinSystem {
           inherit system;
-          specialArgs = { inherit inputs username nixpkgs-unstable; };
+          specialArgs = { inherit inputs username; };
           modules = [
+            # Apply overlays
+            { nixpkgs.overlays = builtins.attrValues overlays; }
+            
             # Host-specific configuration
             ./hosts/${hostName}
             
@@ -65,7 +74,7 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.${username} = import ./home/${username};
-              home-manager.extraSpecialArgs = { inherit inputs username nixpkgs-unstable; };
+              home-manager.extraSpecialArgs = { inherit inputs username; };
             }
           ] ++ modules;
         };

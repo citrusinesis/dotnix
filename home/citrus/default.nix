@@ -1,4 +1,4 @@
-{ config, lib, pkgs, inputs, username, nixpkgs-unstable, ... }:
+{ config, lib, pkgs, inputs, username, ... }:
 {
   # Import modular program configurations
   imports = [
