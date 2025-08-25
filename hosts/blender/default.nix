@@ -56,7 +56,6 @@ in
   services.xserver.xkb.layout = "us";
 
   # Enable sound with PipeWire (recommended for Plasma 6)
-  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
