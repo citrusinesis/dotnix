@@ -115,6 +115,7 @@
     powerOnBoot = true;
     settings.General.Experimental = true;
   };
+  services.blueman.enable = true;
 
   # Nvidia settings
   hardware.graphics.enable = true;
@@ -160,7 +161,13 @@
     
     # Performance monitoring
     nvtopPackages.nvidia
+    
+    # Bluetooth management
+    kdePackages.bluedevil
   ];
+
+  # Home Manager backup configuration
+  home-manager.backupFileExtension = "backup";
 
   # Define user accounts
   users.users.${username} = {
