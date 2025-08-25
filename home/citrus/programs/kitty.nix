@@ -3,7 +3,7 @@
     enable = true;
 
     settings = {
-      font_family = "GeistMono NF";
+      font_family = "Hack Nerd Font Mono";
       bold_font = "auto";
       italic_font = "auto";
       font_size = 12.0;

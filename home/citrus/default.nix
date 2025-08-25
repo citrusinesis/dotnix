@@ -1,14 +1,4 @@
 { config, lib, pkgs, inputs, username, nixpkgs-unstable, ... }:
-
-let
-  # Import unstable packages with unfree support
-  unstable = import nixpkgs-unstable {
-    system = pkgs.stdenv.hostPlatform.system;
-    config = {
-      allowUnfree = true;
-    };
-  };
-in
 {
   # Import modular program configurations
   imports = [
@@ -74,10 +64,10 @@ in
     # Platform-specific packages
     (lib.mkIf pkgs.stdenv.isDarwin coreutils)
     
-    # Example: Use packages from unstable channel
-    # unstable.some-bleeding-edge-package
-    unstable.claude-code
-    unstable.firefox
+    # Example: Use packages from unstable channel via overlay
+    # pkgs.unstable.some-bleeding-edge-package
+    pkgs.unstable.claude-code
+    pkgs.unstable.firefox
   ];
 
   # Additional home configurations based on platform

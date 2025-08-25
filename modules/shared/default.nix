@@ -75,6 +75,7 @@
   # Shared font configuration for all systems
   fonts.packages = with pkgs; [
     # Nerd fonts for both platforms
+    nerd-fonts.hack
     nerd-fonts.geist-mono
     nerd-fonts.d2coding
     nerd-fonts.jetbrains-mono
