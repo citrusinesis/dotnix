@@ -1,14 +1,5 @@
-{ config, lib, pkgs, inputs, username ? "game", nixpkgs-unstable, ... }:
+{ config, lib, pkgs, inputs, username ? "game", ... }:
 
-let
-  # Import unstable packages with unfree support
-  unstable = import nixpkgs-unstable {
-    system = pkgs.stdenv.hostPlatform.system;
-    config = {
-      allowUnfree = true;
-    };
-  };
-in
 {
   # Import modular program configurations
   imports = [
@@ -65,7 +56,7 @@ in
     file-roller
     
     # Web browser for gaming needs
-    unstable.firefox
+    pkgs.unstable.firefox
     
     # Gaming peripherals support
     piper

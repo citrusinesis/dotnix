@@ -5,7 +5,7 @@
     enable = true;
     
     font = {
-      name = "GeistMono NF";
+      name = "Hack Nerd Font Mono";
       size = 12;
     };
     

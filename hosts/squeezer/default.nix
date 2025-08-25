@@ -1,5 +1,8 @@
 { config, pkgs, lib, inputs, username, ... }:
 
+let
+  personal = import ../../personal.nix;
+in
 {
   # Import modules
   imports = [
@@ -11,8 +14,8 @@
   networking.hostName = "squeezer";
   networking.knownNetworkServices = [ "Wi-Fi" "Ethernet" ];
 
-  # Set timezone (consistent with blender host)
-  time.timeZone = "Asia/Seoul";
+  # Set timezone from personal configuration
+  time.timeZone = personal.timezone;
 
   # Host-specific homebrew casks
   homebrew.casks = [

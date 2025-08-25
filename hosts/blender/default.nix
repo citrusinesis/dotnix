@@ -1,11 +1,13 @@
 { config, pkgs, lib, inputs, username, ... }:
 
+let
+  personal = import ../../personal.nix;
+in
 {
   imports = [
     ./hardware-configuration.nix
     ../../modules/shared
     ../../modules/nixos
-    
   ];
 
   # Bootloader
@@ -17,8 +19,8 @@
   networking.hostName = "blender";
   networking.networkmanager.enable = true;
 
-  # Set your time zone
-  time.timeZone = "Asia/Seoul";
+  # Set your time zone from personal configuration
+  time.timeZone = personal.timezone;
 
   # Select internationalisation properties
   i18n = {
@@ -184,8 +186,6 @@
     shell = pkgs.zsh;
     description = "Gaming User";
   };
-
-
 
   # System packages are defined in shared module
 

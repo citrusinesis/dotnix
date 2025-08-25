@@ -13,7 +13,7 @@
   # Set default locale for NixOS
   i18n.defaultLocale = lib.mkDefault "en_US.UTF-8";
 
-  # Set default time zone
+  # Set default time zone - override in host configuration with personal.timezone
   time.timeZone = lib.mkDefault "UTC";
 
   # Common NixOS configuration that should apply to all NixOS systems

@@ -8,11 +8,14 @@
     ll = "ls -la";
     grep = "grep --color=auto";
     g = "git";
+    vi = "vim";
   };
 
   environment.variables = {
     EDITOR = "vim";
     VISUAL = "vim";
+    
+    TERM = "xterm-256color";
   };
 
   # Shared system packages for all systems
@@ -74,7 +77,7 @@
 
   # Shared font configuration for all systems
   fonts.packages = with pkgs; [
-    # Nerd fonts for both platforms
+    # Nerd fonts for both platforms (using consistent names)
     nerd-fonts.hack
     nerd-fonts.geist-mono
     nerd-fonts.d2coding

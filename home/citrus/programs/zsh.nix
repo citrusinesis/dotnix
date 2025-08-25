@@ -81,11 +81,6 @@
       # Disable oh-my-zsh themes (let starship handle the prompt)
       export ZSH_THEME=""
 
-      # Initialize starship if it's not already initialized
-      if [ -z "$STARSHIP_SHELL" ]; then
-        eval "$(${pkgs.starship}/bin/starship init zsh)"
-      fi
-
       # Set PATH
       export PATH=$HOME/.local/bin:$PATH
 
@@ -104,11 +99,6 @@
       # Load local zshrc if it exists
       if [ -f ~/.zshrc.local ]; then
         source ~/.zshrc.local
-      fi
-
-      # Ensure starship is properly initialized as the last step
-      if [ -z "$STARSHIP_SHELL" ]; then
-        eval "$(${pkgs.starship}/bin/starship init zsh)"
       fi
 
       # OS-specific configurations

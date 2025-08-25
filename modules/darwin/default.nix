@@ -10,7 +10,7 @@
 
   # Common Darwin system configuration
 
-  # Set default time zone
+  # Set default time zone - override in host configuration with personal.timezone
   time.timeZone = lib.mkDefault "UTC";
 
   # Environment variables are defined in shared module

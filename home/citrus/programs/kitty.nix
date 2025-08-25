@@ -2,11 +2,12 @@
   programs.kitty = {
     enable = true;
 
+    font = {
+      name = "Hack Nerd Font Mono";
+      size = 12;
+    };
+
     settings = {
-      font_family = "Hack Nerd Font Mono";
-      bold_font = "auto";
-      italic_font = "auto";
-      font_size = 12.0;
 
       background = "#1E1E2E"; # Catppuccin Macchiato background
       foreground = "#CDD6F4"; # Catppuccin Macchiato foreground
