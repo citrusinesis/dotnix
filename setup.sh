@@ -85,13 +85,30 @@ if [[ "$OS" == "darwin" ]]; then
   print_step "Checking for nix-darwin"
   if ! check_command darwin-rebuild; then
     print_step "Installing nix-darwin"
-    nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer
-    ./result/bin/darwin-installer
     
-    if ! check_command darwin-rebuild; then
-      print_error "Failed to install nix-darwin"
+    # Download and build the nix-darwin installer
+    if ! nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer; then
+      print_error "Failed to download or build nix-darwin installer"
       exit 1
     fi
+    
+    # Run the installer
+    if ! ./result/bin/darwin-installer; then
+      print_error "Failed to run nix-darwin installer"
+      exit 1
+    fi
+    
+    # Clean up the result link
+    rm -f ./result
+    
+    # Verify installation was successful
+    if ! check_command darwin-rebuild; then
+      print_error "nix-darwin installation failed - darwin-rebuild not found in PATH"
+      print_error "You may need to restart your shell or reload your profile"
+      exit 1
+    fi
+    
+    print_step "nix-darwin installed successfully"
   fi
 fi
 
@@ -111,13 +128,20 @@ ln -sf "$SCRIPT_DIR" ~/.nixconfig
 
 # Initial build
 print_step "Building initial configuration (this may take a while)"
+cd "$SCRIPT_DIR" || {
+  print_error "Failed to change to script directory: $SCRIPT_DIR"
+  exit 1
+}
+
 if [[ "$OS" == "darwin" ]]; then
-  cd "$SCRIPT_DIR" && darwin-rebuild switch --flake .#squeezer
+  BUILD_CMD="darwin-rebuild switch --flake .#squeezer"
 else
-  cd "$SCRIPT_DIR" && sudo nixos-rebuild switch --flake .#blender
+  BUILD_CMD="sudo nixos-rebuild switch --flake .#blender"
 fi
 
-if [ $? -eq 0 ]; then
+print_step "Running: $BUILD_CMD"
+
+if $BUILD_CMD; then
   print_header "Setup completed successfully!"
   echo ""
   echo "Your Nix configuration is now installed and linked to ~/.nixconfig"
@@ -127,6 +151,13 @@ if [ $? -eq 0 ]; then
     echo "Note: You may need to restart your terminal or log out and back in for all changes to take effect."
   fi
 else
-  print_error "Setup failed. Please check the error messages above."
-  exit 1
+  EXIT_CODE=$?
+  print_error "Setup failed with exit code $EXIT_CODE"
+  print_error "Please check the error messages above and try again"
+  print_error ""
+  print_error "Common solutions:"
+  print_error "1. Ensure all Nix channels are up to date"
+  print_error "2. Try running 'nix flake update' in $SCRIPT_DIR"
+  print_error "3. Check that all file paths in the configuration are correct"
+  exit $EXIT_CODE
 fi
