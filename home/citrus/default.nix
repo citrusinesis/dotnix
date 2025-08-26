@@ -48,6 +48,7 @@
     bat
     eza
     fzf
+    fastfetch
 
     # Version control
     gh

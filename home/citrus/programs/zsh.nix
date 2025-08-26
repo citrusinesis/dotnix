@@ -78,6 +78,9 @@
 
     # Additional configuration
     initContent = lib.mkOrder 550 ''
+      # Show system info on shell start
+      ${pkgs.fastfetch}/bin/fastfetch
+
       # Disable oh-my-zsh themes (let starship handle the prompt)
       export ZSH_THEME=""
 
