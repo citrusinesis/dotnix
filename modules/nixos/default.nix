@@ -55,8 +55,8 @@
   boot = {
     # Clean temporary directories on boot
     tmp.cleanOnBoot = true;
-    # Use the latest kernel
-    kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
+    # Use the latest LTS kernel
+    kernelPackages = lib.mkDefault pkgs.linuxPackages_lts_kernel;
   };
 
   # Default power management settings
