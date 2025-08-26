@@ -73,7 +73,11 @@
     };
   };
 
-  nixpkgs.config.allowUnfree = true;
+  # Nixpkgs configuration - shared across all systems
+  nixpkgs.config = {
+    allowUnfree = true;
+    # Add other global nixpkgs options here if needed
+  };
 
   # Shared font configuration for all systems
   fonts.packages = with pkgs; [
