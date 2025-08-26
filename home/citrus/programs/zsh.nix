@@ -31,8 +31,8 @@
 
       # System commands
       update = if pkgs.stdenv.isDarwin
-               then "sudo darwin-rebuild switch --flake ~/Development/dotnix#squeezer"
-               else "sudo nixos-rebuild switch --flake ~/Development/dotnix#blender";
+               then "sudo darwin-rebuild switch --flake ~/.config/dotnix#squeezer"
+               else "sudo nixos-rebuild switch --flake ~/.config/dotnix#blender";
 
       # Utilities
       grep = "grep --color=auto";
@@ -46,7 +46,7 @@
 
       # Quick edit
       zshrc = "$EDITOR ~/.zshrc";
-      nixconf = "cd ~/Development/dotnix";
+      nixconf = "cd ~/.config/dotnix";
     };
 
     # History configuration
