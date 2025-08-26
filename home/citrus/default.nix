@@ -30,6 +30,7 @@
     # Editors and terminal utilities
     neovim
     tmux
+    zellij
 
     # Nix
     nil
