@@ -55,8 +55,8 @@
   boot = {
     # Clean temporary directories on boot
     tmp.cleanOnBoot = true;
-    # Use the latest LTS kernel
-    kernelPackages = lib.mkDefault pkgs.linuxPackages_lts_kernel;
+    # Use the default LTS kernel (6.12 LTS in NixOS 25.05)
+    kernelPackages = lib.mkDefault pkgs.linuxPackages;
   };
 
   # Default power management settings
