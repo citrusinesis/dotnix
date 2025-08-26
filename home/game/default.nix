@@ -56,7 +56,7 @@
     file-roller
     
     # Web browser for gaming needs
-    pkgs.unstable.firefox
+    pkgs.bleeding.firefox
     
     # Gaming peripherals support
     piper

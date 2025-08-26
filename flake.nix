@@ -2,9 +2,12 @@
   description = "My Nix Configuration";
 
   inputs = {
-    # Core inputs
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    # Stable system base with modules
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    # Well-tested unstable for system overlay
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    # Bleeding edge for home-manager packages (fastest updates)
+    nixpkgs-bleeding.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     
     # Darwin inputs
     darwin = {
@@ -22,7 +25,7 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, darwin, home-manager, flake-utils, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, nixpkgs-bleeding, darwin, home-manager, flake-utils, ... }@inputs:
     let
       supportedSystems = [ "x86_64-linux" "aarch64-darwin" "x86_64-darwin" ];
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;

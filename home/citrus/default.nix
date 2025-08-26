@@ -64,10 +64,11 @@
     # Platform-specific packages
     (lib.mkIf pkgs.stdenv.isDarwin coreutils)
     
-    # Example: Use packages from unstable channel via overlay
-    # pkgs.unstable.some-bleeding-edge-package
-    pkgs.unstable.claude-code
-    pkgs.unstable.firefox
+    # Example: Use packages from different channels via overlay
+    # System unstable: pkgs.unstable.some-package
+    # Bleeding edge (fastest): pkgs.bleeding.some-package
+    pkgs.bleeding.claude-code
+    pkgs.bleeding.firefox
   ];
 
   # Additional home configurations based on platform
