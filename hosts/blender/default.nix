@@ -50,7 +50,23 @@ in
 
   # Enable KDE Plasma 6 Desktop Environment
   services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.wayland.enable = true;
   services.desktopManager.plasma6.enable = true;
+
+  # Power management - disable sleep/suspend system-wide
+  services.logind = {
+    lidSwitch = "ignore";
+    powerKey = "ignore";
+    suspendKey = "ignore";
+    hibernateKey = "ignore";
+    lidSwitchExternalPower = "ignore";
+    extraConfig = ''
+      HandleSuspendKey=ignore
+      HandleHibernateKey=ignore
+      HandleLidSwitch=ignore
+      HandleLidSwitchExternalPower=ignore
+    '';
+  };
 
   # Configure keymap in X11
   services.xserver.xkb.layout = "us";
