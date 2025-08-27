@@ -2,6 +2,7 @@
 {
   programs.vscode = {
     enable = true;
+    package = pkgs.bleeding.vscode;
 
     profiles.default.userSettings = {
       editor.formatOnSaveMode = "modificationsIfAvailable";
