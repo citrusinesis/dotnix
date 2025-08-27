@@ -73,6 +73,13 @@
     bash.completion.enable = true;
     # Zsh shell configuration
     zsh.enable = true;
+
+    # Enable nix-ld for running unpatched binaries
+    nix-ld.enable = true;
+    nix-ld.libraries = [
+      # Add any missing dynamic libraries for unpackaged programs
+      # here, NOT in environment.systemPackages
+    ];
   };
 
   # Default user configuration
@@ -93,9 +100,9 @@
     ];
     fontconfig = {
       defaultFonts = {
-        serif = [ "Noto Serif" "Liberation Serif" ];
-        sansSerif = [ "Noto Sans" "Liberation Sans" ];
-        monospace = [ "GeistMono NF" "Liberation Mono" ];
+        serif = [ "Noto Serif CJK KR" "Noto Serif" "Liberation Serif" ];
+        sansSerif = [ "Noto Sans CJK KR" "Noto Sans" "Liberation Sans" ];
+        monospace = [ "Hack Nerd Font Mono" "GeistMono NF" "Liberation Mono" ];
         emoji = [ "Noto Color Emoji" ];
       };
     };
