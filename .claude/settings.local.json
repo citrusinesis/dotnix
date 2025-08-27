@@ -1,10 +1,13 @@
 {
   "permissions": {
-    "allow": [
+    "allow": [ 
+      "WebSearch",
+
       "Bash(mkdir:*)",
+
       "Bash(nix flake check:*)",
-      "WebFetch(domain:wiki.archlinux.org)",
-      "WebSearch"
+      "Bash(systemctl status:*)",
+      "Bash(journalctl:*)"
     ],
     "deny": [],
     "ask": []
