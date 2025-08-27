@@ -10,5 +10,6 @@
     ./starship.nix
     ./vscode.nix
     ./kitty.nix
+    ./neovim.nix
   ];
 }

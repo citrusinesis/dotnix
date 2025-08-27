@@ -27,8 +27,7 @@
 
   # Configure packages
   home.packages = with pkgs; [
-    # Editors and terminal utilities
-    neovim
+    # Terminal utilities 
     tmux
     zellij
 

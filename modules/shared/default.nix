@@ -12,8 +12,8 @@
   };
 
   environment.variables = {
-    EDITOR = "vim";
-    VISUAL = "vim";
+    EDITOR = "nvim";
+    VISUAL = "nvim";
     
     TERM = "xterm-256color";
   };
