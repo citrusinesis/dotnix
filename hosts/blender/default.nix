@@ -116,7 +116,6 @@ in
     powerOnBoot = true;
     settings.General.Experimental = true;
   };
-  services.blueman.enable = true;
 
   # Nvidia settings
   hardware.graphics.enable = true;
