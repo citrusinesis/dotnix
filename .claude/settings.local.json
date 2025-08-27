@@ -3,7 +3,8 @@
     "allow": [
       "Bash(mkdir:*)",
       "Bash(nix flake check:*)",
-      "WebFetch(domain:wiki.archlinux.org)"
+      "WebFetch(domain:wiki.archlinux.org)",
+      "WebSearch"
     ],
     "deny": [],
     "ask": []
