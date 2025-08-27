@@ -4,15 +4,12 @@
 
     font = {
       name = "Hack Nerd Font Mono";
-      size = 12;
+      size = 11;
     };
 
+    themeFile = "Catppuccin-Macchiato";
+    
     settings = {
-
-      background = "#1E1E2E"; # Catppuccin Macchiato background
-      foreground = "#CDD6F4"; # Catppuccin Macchiato foreground
-      cursor = "#F5E0DC";     # Catppuccin Macchiato Rosewater
-
       # Cursor settings
       cursor_shape = "block";
       cursor_beam_thickness = "1.5";
@@ -28,6 +25,7 @@
 
       # Window layout and padding
       window_padding_width = "4";
+      background_opacity = "0.9";
 
       # Bell settings
       enable_audio_bell = "no";
