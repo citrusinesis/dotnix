@@ -58,6 +58,10 @@
     duf
     procs
 
+    # Productivity
+    slack
+    obsidian
+
     # Platform-specific packages
     (lib.mkIf pkgs.stdenv.isDarwin coreutils)
     
