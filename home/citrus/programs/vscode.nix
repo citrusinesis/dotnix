@@ -81,7 +81,6 @@
       gruntfuggly.todo-tree
 
       donjayamanne.githistory
-      eamodio.gitlens
     ];
   };
 }
