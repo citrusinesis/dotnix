@@ -11,5 +11,6 @@
     ./vscode.nix
     ./kitty.nix
     ./neovim.nix
+    ./podman.nix
   ];
 }

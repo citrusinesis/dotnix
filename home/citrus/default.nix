@@ -52,6 +52,12 @@
     # Version control
     gh
 
+    # Kubernetes and container tools
+    minikube
+    kubectl
+    podman
+    containerd
+
     # Additional utilities
     file
     du-dust

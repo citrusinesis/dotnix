@@ -34,6 +34,9 @@
                then "sudo darwin-rebuild switch --flake ~/.config/dotnix#squeezer"
                else "sudo nixos-rebuild switch --flake ~/.config/dotnix#blender";
 
+      # Kubernetes/Minikube
+      kubectl = "minikube kubectl --";
+
       # Utilities
       grep = "grep --color=auto";
       df = "df -h";
@@ -97,6 +100,24 @@
       if [ -n "''${commands[fzf-share]}" ]; then
         source "$(fzf-share)/key-bindings.zsh"
         source "$(fzf-share)/completion.zsh"
+      fi
+
+      # Kubernetes/Minikube completions
+      if command -v minikube &> /dev/null; then
+        source <(minikube completion zsh)
+      fi
+      
+      if command -v helm &> /dev/null; then
+        source <(helm completion zsh)
+      fi
+
+      # kubectl and docker completion require the control plane to be running
+      if command -v minikube &> /dev/null && [ "$(minikube status -o json 2>/dev/null | ${pkgs.jq}/bin/jq -r '.Host // "Stopped"')" = "Running" ]; then
+        source <(minikube kubectl -- completion zsh)
+        # Only load docker-env for docker driver
+        if [ "$(minikube config get driver 2>/dev/null)" = "docker" ]; then
+          eval $(minikube -p minikube docker-env)
+        fi
       fi
 
       # Load local zshrc if it exists
